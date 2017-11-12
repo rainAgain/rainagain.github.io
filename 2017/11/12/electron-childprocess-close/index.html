@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="hexo," />
+  <meta name="keywords" content="electron,关闭应用,子进程,退出," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Quick StartCreate a new post1$ hexo new &quot;My New Post&quot; More info: Writing">
-<meta name="keywords" content="hexo">
+<meta name="description" content="经过两天的各种文档查找，最终放弃第一种，只能选择beforeUnload方式来处理。 失败的一种方式： vue中 methods: 1234567891011closeServe(pid) &amp;#123;	const execClose = `taskkill /pid $&amp;#123;pid&amp;#125; -t -f`;	$childProcess.exec(execClose, (error, st">
+<meta name="keywords" content="electron,关闭应用,子进程,退出">
 <meta property="og:type" content="article">
-<meta property="og:title" content="how to use hexo">
-<meta property="og:url" content="http://rainagain.mukapo.com/2017/11/09/hello-world/index.html">
+<meta property="og:title" content="electron 关闭软件同时，子进程也退出">
+<meta property="og:url" content="http://rainagain.mukapo.com/2017/11/12/electron-childprocess-close/index.html">
 <meta property="og:site_name" content="rainAgain">
-<meta property="og:description" content="Quick StartCreate a new post1$ hexo new &quot;My New Post&quot; More info: Writing">
+<meta property="og:description" content="经过两天的各种文档查找，最终放弃第一种，只能选择beforeUnload方式来处理。 失败的一种方式： vue中 methods: 1234567891011closeServe(pid) &amp;#123;	const execClose = `taskkill /pid $&amp;#123;pid&amp;#125; -t -f`;	$childProcess.exec(execClose, (error, st">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-11T08:38:45.000Z">
+<meta property="og:updated_time" content="2017-11-12T15:06:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="how to use hexo">
-<meta name="twitter:description" content="Quick StartCreate a new post1$ hexo new &quot;My New Post&quot; More info: Writing">
+<meta name="twitter:title" content="electron 关闭软件同时，子进程也退出">
+<meta name="twitter:description" content="经过两天的各种文档查找，最终放弃第一种，只能选择beforeUnload方式来处理。 失败的一种方式： vue中 methods: 1234567891011closeServe(pid) &amp;#123;	const execClose = `taskkill /pid $&amp;#123;pid&amp;#125; -t -f`;	$childProcess.exec(execClose, (error, st">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://rainagain.mukapo.com/2017/11/09/hello-world/"/>
+  <link rel="canonical" href="http://rainagain.mukapo.com/2017/11/12/electron-childprocess-close/"/>
 
 
 
 
 
-  <title>how to use hexo | rainAgain</title>
+  <title>electron 关闭软件同时，子进程也退出 | rainAgain</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://rainagain.mukapo.com/2017/11/09/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://rainagain.mukapo.com/2017/11/12/electron-childprocess-close/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="rainagain">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">how to use hexo</h1>
+          <h1 class="post-title" itemprop="name headline">electron 关闭软件同时，子进程也退出</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T22:38:43+08:00">
-                2017-11-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-12T23:02:13+08:00">
+                2017-11-12
               </time>
             
 
@@ -320,15 +320,17 @@
       
 
       
-        <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+        <p>经过两天的各种文档查找，最终放弃第一种，只能选择beforeUnload方式来处理。</p>
+<p>失败的一种方式：</p>
+<p>vue中</p>
+<p>methods:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">closeServe(pid) &#123;</span><br><span class="line">	const execClose = `taskkill /pid $&#123;pid&#125; -t -f`;</span><br><span class="line"></span><br><span class="line">	$childProcess.exec(execClose, (error, stdout, stderr) =&gt; &#123;</span><br><span class="line">	    if (error) &#123;</span><br><span class="line">		    console.log(error.stack);</span><br><span class="line">		    console.log(&apos;Error code: &apos;+error.code);</span><br><span class="line">		    return;</span><br><span class="line">	    &#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<p>mounted:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$remote.getCurrentWindow().on(&apos;close&apos;, () =&gt; &#123;</span><br><span class="line">  </span><br><span class="line">    this.closeServe(this.projectList[0].execChild);</span><br><span class="line">    $remote.getCurrentWindow().removeAllListeners();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>成功的方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">let closeWindow = false</span><br><span class="line"></span><br><span class="line">window.addEventListener(&apos;beforeunload&apos;, evt =&gt; &#123;</span><br><span class="line">    if (closeWindow) return</span><br><span class="line">    logFile(`[currentWindow beforeunload]`);</span><br><span class="line">    evt.returnValue = false</span><br><span class="line"></span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">        let result = $dialog.showMessageBox(&#123;</span><br><span class="line">            message: &apos;是否确认退出应用?&apos;,</span><br><span class="line">            buttons: [&apos;是&apos;, &apos;否&apos;]</span><br><span class="line">        &#125;)</span><br><span class="line">        logFile(`[currentWindow beforeunload result] $&#123;result&#125;`);</span><br><span class="line">        if (result == 0) &#123;</span><br><span class="line">            closeWindow = true</span><br><span class="line"></span><br><span class="line">            if(this.projectList.length) &#123;</span><br><span class="line">        </span><br><span class="line">                this.projectList.forEach((item, index) =&gt; &#123;</span><br><span class="line"></span><br><span class="line">                    //不管是否启动都执行</span><br><span class="line">                    item.isActive = false;</span><br><span class="line">                    localStorage.setItem(&apos;auto_project_collection&apos;, JSON.stringify(this.projectList));</span><br><span class="line">                    </span><br><span class="line">                    logFile(`[currentWindow close forEach] $&#123;item.isActive&#125;`);    </span><br><span class="line">                    this.closeServe(item, index, true);</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line">            &#125; </span><br><span class="line"></span><br><span class="line">            $currentWindow.close();</span><br><span class="line">            $currentWindow.removeAllListeners(&apos;close&apos;);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这个方法需要在<em>入口的vue组件</em>中，否则会重复多次监听，导致多次出现是否关闭的提示弹窗。</p>
 
       
     </div>
@@ -346,7 +348,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/hexo/" rel="tag"># hexo</a>
+            <a href="/tags/electron/" rel="tag"># electron</a>
+          
+            <a href="/tags/关闭应用/" rel="tag"># 关闭应用</a>
+          
+            <a href="/tags/子进程/" rel="tag"># 子进程</a>
+          
+            <a href="/tags/退出/" rel="tag"># 退出</a>
           
         </div>
       
@@ -359,15 +367,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/11/11/object-array/" rel="next" title="javascript 对象数组排序">
+                <i class="fa fa-chevron-left"></i> javascript 对象数组排序
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/09/create-post/" rel="prev" title="npm 升级到5.4.1后遇到的权限问题">
-                npm 升级到5.4.1后遇到的权限问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -450,17 +458,8 @@ var jiathis_config={
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -540,22 +539,6 @@ var jiathis_config={
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
