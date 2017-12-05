@@ -79,22 +79,22 @@
 
 
 
-<meta name="description" content="原文 渲染树构建、布局及绘制CSSOM 树和 DOM 树合并成渲染树，然后用于计算每个可见元素的布局，并输出给绘制流程，将像素渲染到屏幕上。优化上述每一个步骤对实现最佳渲染性能至关重要。 在前面介绍构建对象模型的章节中，我们根据 HTML 和 CSS 输入构建了 DOM 树和 CSSOM 树。 不过，它们都是独立的对象，分别网罗文档不同方面的信息：一个描述内容，另一个则是描述需要对文档应用的样式规">
+<meta name="description" content="渲染树构建、布局及绘制CSSOM 树和 DOM 树合并成渲染树，然后用于计算每个可见元素的布局，并输出给绘制流程，将像素渲染到屏幕上。优化上述每一个步骤对实现最佳渲染性能至关重要。 在前面介绍构建对象模型的章节中，我们根据 HTML 和 CSS 输入构建了 DOM 树和 CSSOM 树。 不过，它们都是独立的对象，分别网罗文档不同方面的信息：一个描述内容，另一个则是描述需要对文档应用的样式规则。我">
 <meta name="keywords" content="浏览器渲染">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器渲染 - 渲染树构建、布局及绘制">
 <meta property="og:url" content="http://rainagain.mukapo.com/2017/12/05/browser-render-1/index.html">
 <meta property="og:site_name" content="rainAgain">
-<meta property="og:description" content="原文 渲染树构建、布局及绘制CSSOM 树和 DOM 树合并成渲染树，然后用于计算每个可见元素的布局，并输出给绘制流程，将像素渲染到屏幕上。优化上述每一个步骤对实现最佳渲染性能至关重要。 在前面介绍构建对象模型的章节中，我们根据 HTML 和 CSS 输入构建了 DOM 树和 CSSOM 树。 不过，它们都是独立的对象，分别网罗文档不同方面的信息：一个描述内容，另一个则是描述需要对文档应用的样式规">
+<meta property="og:description" content="渲染树构建、布局及绘制CSSOM 树和 DOM 树合并成渲染树，然后用于计算每个可见元素的布局，并输出给绘制流程，将像素渲染到屏幕上。优化上述每一个步骤对实现最佳渲染性能至关重要。 在前面介绍构建对象模型的章节中，我们根据 HTML 和 CSS 输入构建了 DOM 树和 CSSOM 树。 不过，它们都是独立的对象，分别网罗文档不同方面的信息：一个描述内容，另一个则是描述需要对文档应用的样式规则。我">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://rainagain.mukapo.com/2017/12/05/browser-render-1/render-tree-construction.png">
 <meta property="og:image" content="http://rainagain.mukapo.com/2017/12/05/browser-render-1/layout-viewport.png">
 <meta property="og:image" content="http://rainagain.mukapo.com/2017/12/05/browser-render-1/layout-timeline.png">
 <meta property="og:image" content="http://rainagain.mukapo.com/2017/12/05/browser-render-1/device-dom-small.png">
-<meta property="og:updated_time" content="2017-12-05T14:35:36.000Z">
+<meta property="og:updated_time" content="2017-12-05T14:55:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器渲染 - 渲染树构建、布局及绘制">
-<meta name="twitter:description" content="原文 渲染树构建、布局及绘制CSSOM 树和 DOM 树合并成渲染树，然后用于计算每个可见元素的布局，并输出给绘制流程，将像素渲染到屏幕上。优化上述每一个步骤对实现最佳渲染性能至关重要。 在前面介绍构建对象模型的章节中，我们根据 HTML 和 CSS 输入构建了 DOM 树和 CSSOM 树。 不过，它们都是独立的对象，分别网罗文档不同方面的信息：一个描述内容，另一个则是描述需要对文档应用的样式规">
+<meta name="twitter:description" content="渲染树构建、布局及绘制CSSOM 树和 DOM 树合并成渲染树，然后用于计算每个可见元素的布局，并输出给绘制流程，将像素渲染到屏幕上。优化上述每一个步骤对实现最佳渲染性能至关重要。 在前面介绍构建对象模型的章节中，我们根据 HTML 和 CSS 输入构建了 DOM 树和 CSSOM 树。 不过，它们都是独立的对象，分别网罗文档不同方面的信息：一个描述内容，另一个则是描述需要对文档应用的样式规则。我">
 <meta name="twitter:image" content="http://rainagain.mukapo.com/2017/12/05/browser-render-1/render-tree-construction.png">
 
 
@@ -347,8 +347,7 @@
       
 
       
-        <p><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction" target="_blank" rel="external">原文</a></p>
-<h3 id="渲染树构建、布局及绘制"><a href="#渲染树构建、布局及绘制" class="headerlink" title="渲染树构建、布局及绘制"></a>渲染树构建、布局及绘制</h3><p>CSSOM 树和 DOM 树合并成渲染树，然后用于计算每个可见元素的布局，并输出给绘制流程，将像素渲染到屏幕上。优化上述每一个步骤对实现最佳渲染性能至关重要。</p>
+        <h3 id="渲染树构建、布局及绘制"><a href="#渲染树构建、布局及绘制" class="headerlink" title="渲染树构建、布局及绘制"></a>渲染树构建、布局及绘制</h3><p>CSSOM 树和 DOM 树合并成渲染树，然后用于计算每个可见元素的布局，并输出给绘制流程，将像素渲染到屏幕上。优化上述每一个步骤对实现最佳渲染性能至关重要。</p>
 <p>在前面介绍构建对象模型的章节中，我们根据 HTML 和 CSS 输入构建了 DOM 树和 CSSOM 树。 不过，它们都是独立的对象，分别网罗文档不同方面的信息：一个描述内容，另一个则是描述需要对文档应用的样式规则。我们该如何将两者合并，让浏览器在屏幕上渲染像素呢？</p>
 <h4 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h4><ul>
 <li>DOM 树与 CSSOM 树合并后形成渲染树。</li>
@@ -392,6 +391,7 @@
 5、将各个节点绘制到屏幕上。
 </code></pre><p>我们的演示网页看起来可能很简单，实际上却需要完成相当多的工作。如果 DOM 或 CSSOM 被修改，您只能再执行一遍以上所有步骤，以确定哪些像素需要在屏幕上进行重新渲染。</p>
 <p><code>_优化关键渲染路径_就是指最大限度缩短执行上述第 1 步至第 5 步耗费的总时间。</code>这样一来，就能尽快将内容渲染到屏幕上，此外还能缩短首次渲染后屏幕刷新的时间，即为交互式内容实现更高的刷新率。</p>
+<p><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction" target="_blank" rel="external">原文</a></p>
 
       
     </div>
@@ -431,6 +431,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/05/browser-mode/" rel="prev" title="浏览器模式与文档模式">
+                浏览器模式与文档模式 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -542,7 +546,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -553,7 +557,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -564,7 +568,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
