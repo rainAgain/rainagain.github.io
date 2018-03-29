@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="最近公司有同事问我 electron 开发中遇到的某些问题如何解决，在沟通的过程中发现，他们是属于零知识点开始开发的，领导下需求，但是他们又没学过，开发过程中很少头疼，然而网上搜的文章也是五花八门，大同小异，所以我准备写一个完整的开发教程(从一无所知到生成软件，并提供更新)。  准备学习的资料： 网址： Electron github-Api Electron 中文文档 Electron-bui">
+<meta name="description" content="最近公司有同事问我 electron 开发中遇到的某些问题如何解决，在沟通的过程中发现，他们是属于零知识点开始开发的，领导下需求，但是他们又没学过，开发过程中很少头疼，然而网上搜的文章也是五花八门，大同小异，所以我准备写一个完整的开发教程(从一无所知到生成软件，并提供更新)。  准备学习的资料： 网址： Electron github-Api github的api文档 Electron 中文文档">
 <meta name="keywords" content="electron,入门">
 <meta property="og:type" content="article">
 <meta property="og:title" content="electron教程（1） - 如何入门">
 <meta property="og:url" content="http://rainagain.mukapo.com/2018/03/30/electron-learn/index.html">
 <meta property="og:site_name" content="rainAgain">
-<meta property="og:description" content="最近公司有同事问我 electron 开发中遇到的某些问题如何解决，在沟通的过程中发现，他们是属于零知识点开始开发的，领导下需求，但是他们又没学过，开发过程中很少头疼，然而网上搜的文章也是五花八门，大同小异，所以我准备写一个完整的开发教程(从一无所知到生成软件，并提供更新)。  准备学习的资料： 网址： Electron github-Api Electron 中文文档 Electron-bui">
+<meta property="og:description" content="最近公司有同事问我 electron 开发中遇到的某些问题如何解决，在沟通的过程中发现，他们是属于零知识点开始开发的，领导下需求，但是他们又没学过，开发过程中很少头疼，然而网上搜的文章也是五花八门，大同小异，所以我准备写一个完整的开发教程(从一无所知到生成软件，并提供更新)。  准备学习的资料： 网址： Electron github-Api github的api文档 Electron 中文文档">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-29T16:20:59.000Z">
+<meta property="og:updated_time" content="2018-03-29T16:26:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="electron教程（1） - 如何入门">
-<meta name="twitter:description" content="最近公司有同事问我 electron 开发中遇到的某些问题如何解决，在沟通的过程中发现，他们是属于零知识点开始开发的，领导下需求，但是他们又没学过，开发过程中很少头疼，然而网上搜的文章也是五花八门，大同小异，所以我准备写一个完整的开发教程(从一无所知到生成软件，并提供更新)。  准备学习的资料： 网址： Electron github-Api Electron 中文文档 Electron-bui">
+<meta name="twitter:description" content="最近公司有同事问我 electron 开发中遇到的某些问题如何解决，在沟通的过程中发现，他们是属于零知识点开始开发的，领导下需求，但是他们又没学过，开发过程中很少头疼，然而网上搜的文章也是五花八门，大同小异，所以我准备写一个完整的开发教程(从一无所知到生成软件，并提供更新)。  准备学习的资料： 网址： Electron github-Api github的api文档 Electron 中文文档">
 
 
 
@@ -347,15 +347,17 @@
 </blockquote>
 <p>准备学习的资料：</p>
 <p>网址：</p>
-<p><a href="https://github.com/electron/electron/tree/master/docs/api" target="_blank" rel="external">Electron github-Api</a></p>
-<p><a href="https://electronjs.org/docs/tutorial/quick-start" target="_blank" rel="external">Electron 中文文档</a></p>
-<p><a href="https://www.electron.build/configuration/configuration" target="_blank" rel="external">Electron-builder</a></p>
-<p><a href="https://www.electron.build/auto-update#" target="_blank" rel="external">Electron-Auto-update</a></p>
-<p><a href="https://www.electron.build/configuration/nsis" target="_blank" rel="external">Electron win打包配置</a></p>
+<p><a href="https://github.com/electron/electron/tree/master/docs/api" target="_blank" rel="external">Electron github-Api</a> <em>github的api文档</em></p>
+<p><a href="https://electronjs.org/docs/tutorial/quick-start" target="_blank" rel="external">Electron 中文文档</a> <em>过一下api，有个印象就好</em></p>
+<p><a href="https://www.electron.build/configuration/configuration" target="_blank" rel="external">Electron-builder</a> <em>打包的时候看</em></p>
+<p><a href="https://www.electron.build/auto-update#" target="_blank" rel="external">Electron-Auto-update</a> <em>打包的时候看</em></p>
+<p><a href="https://www.electron.build/configuration/nsis" target="_blank" rel="external">Electron win打包配置</a> <em>打包的时候看</em></p>
 <p>demo:</p>
-<p><a href="https://github.com/electron/electron-quick-start" target="_blank" rel="external">quick-start</a></p>
-<p><a href="https://github.com/electron/electron-api-demos/releases" target="_blank" rel="external">Electron api-demo</a></p>
-<p><a href="https://github.com/iffy/electron-updater-example" target="_blank" rel="external">Electron 自动更新demo</a></p>
+<p><a href="https://github.com/electron/electron-quick-start" target="_blank" rel="external">quick-start</a>  <em>入门demo</em></p>
+<p><a href="https://github.com/electron/electron-api-demos/releases" target="_blank" rel="external">Electron api-demo</a>  <em>api的一个应用demo，建议下载下来随便点点</em></p>
+<p><a href="https://github.com/iffy/electron-updater-example" target="_blank" rel="external">Electron 自动更新demo</a> <em>自动更新的完整demo，要研究软件更新，建议看这个栗子</em></p>
+<p>以上这些是经常会用到的</p>
+<p>待续..</p>
 
       
     </div>
